@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import styles from './Game.module.css'
 import GameOption from '../gameoption/GameOption'
-import Icon from '../icon/Icon'
+import GameInfo from '../gameinfo/GameInfo'
 
 const gabarito = [
     [0,1,2],
@@ -35,6 +35,12 @@ function Game() {
             })
         }
 
+        const handleReset = ()=> {
+            setGameState((Array(9).fill(0)))
+            setGanhador(0)
+            setPlayerAtual(1) 
+        }
+
             useEffect(() =>{                        
                 setPlayerAtual(playerAtual * -1)
                 verifyGame()
@@ -52,17 +58,12 @@ function Game() {
         
                 </div>
                 </div>
-            <div className={styles.gameInfo}>
-                <h4>Próximo a jogar:</h4>
-                {
-                    playerAtual === 1 && <Icon  iconName='circle'/>
+                <GameInfo
+                playerAtual={playerAtual}
+                ganhador={ganhador}
+                onReset={handleReset}
+                />
                 
-                }
-                        {
-                    playerAtual === -1 && <Icon  iconName='x'/>
-                
-                }
-            </div>
         </div>
         </>
     )
