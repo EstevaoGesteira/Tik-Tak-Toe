@@ -7,7 +7,7 @@ function Header () {
 
     return(
         <div className={styles.header}>
-            <Title>Tik Tak Toe ( Jogo da velha )</Title>
+            <Title>Jogo da velha</Title>
             <Subtitle>Criado por Estevão gesteira</Subtitle>
             <div className={styles.iconContent}>
             <Icon iconName={"github"} link="https://github.com/EstevaoGesteira/Tik-Tak-Toe"/>
