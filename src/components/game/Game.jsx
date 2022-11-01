@@ -37,6 +37,7 @@ function Game() {
 
             useEffect(() =>{                        
                 setPlayerAtual(playerAtual * -1)
+                verifyGame()
         }, [gameState]) 
     return(
         <>
