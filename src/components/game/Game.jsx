@@ -18,6 +18,7 @@ function Game() {
     const [gameState, setGameState] = useState(Array(9).fill(0))
     const [playerAtual, setPlayerAtual]= useState(-1)
     const [ganhador,setGanhador]= useState(0)
+    const [linhaGanhadora, setLinhaGanhadora] = useState([])
 
     const handleClick = (pos) => {
         if (gameState[pos] === 0 && ganhador === 0) {
@@ -31,7 +32,10 @@ function Game() {
             gabarito.forEach((line) => {
                 const values = line.map((pos) => gameState[pos])
                 const sum = values.reduce((sum, value) => sum + value)
-                if (sum === 3 || sum === -3) setGanhador(sum / 3)
+                if (sum === 3 || sum === -3) {
+                    setGanhador(sum / 3)
+                    setLinhaGanhadora(line)
+                }
             })
         }
 
@@ -39,7 +43,10 @@ function Game() {
             setGameState((Array(9).fill(0)))
             setGanhador(0)
             setPlayerAtual(1) 
+            setLinhaGanhadora([])
         }
+
+        const verificarLinhaGanhadora= (pos) => linhaGanhadora.find((value) => value === pos) !== undefined
 
             useEffect(() =>{                        
                 setPlayerAtual(playerAtual * -1)
@@ -52,7 +59,12 @@ function Game() {
                 <div className={styles.game}>
                 { 
                 gameState.map((valor,pos) =>
-                <GameOption key={`game-option-pos-${pos}`} status={valor} onClick={() => handleClick(pos)} />
+                <GameOption 
+                key={`game-option-pos-${pos}`} 
+                status={valor} 
+                onClick={() => handleClick(pos)} 
+                eGanhador={verificarLinhaGanhadora(pos) }     
+                />
                 ) 
                 }
         
